@@ -23,6 +23,10 @@ public class PageFactoryStrategy {
                 return new MoviesPage();
             } case HOME_AUTH -> {
                 return new HomeAuth();
+            } case UPGRADES -> {
+                return new UpgradesPage();
+            } case SEE_DETAILS -> {
+                return new SeeDetailsPage();
             }
             default -> {
                 return null;

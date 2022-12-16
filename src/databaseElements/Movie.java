@@ -1,5 +1,6 @@
 package databaseElements;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.MovieInput;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,9 @@ public class Movie {
     private @Getter @Setter int numLikes;
     private @Getter @Setter double rating;
     private @Getter @Setter int numRatings;
+    @JsonIgnore
+    private @Getter @Setter ArrayList<Integer> movieRatings;
+
 
     public Movie(MovieInput movieInput) {
         name = movieInput.getName();
@@ -31,5 +35,7 @@ public class Movie {
 
         countriesBanned = new ArrayList<>();
         countriesBanned.addAll(movieInput.getCountriesBanned());
+
+        movieRatings = new ArrayList<>();
     }
 }

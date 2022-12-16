@@ -148,17 +148,14 @@
         "name": "Eduard",
         "password": "secret"
       }
-    },
-    {
+    },{
       "type": "change page",
       "page": "upgrades"
-    },
-    {
+    },{
       "type": "on page",
       "feature": "buy tokens",
       "count": "50"
-    },
-    {
+    },{
       "type": "on page",
       "feature": "buy premium account"
     },
@@ -232,5 +229,6 @@
       "movie": "John Wick: Chapter 3 - Parabellum",
       "rate": 5
     }
+
   ]
 }

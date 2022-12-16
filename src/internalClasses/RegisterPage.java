@@ -32,8 +32,6 @@ public class RegisterPage implements Page{
         Output.display(programInfo.getCurrentUser(), Output.TYPE.NO_ERRROR, output);
         //switch page after completing action
         programInfo.setCurrentPage(PageSwitcher.CURRENT_PAGE.HOME_AUTH);
-        if (programInfo.getCurrentUser() == null) {
-            System.out.println("CURRENT USER IS NULL AT END OF REGISTER\n");
-        }
+
     }
 }

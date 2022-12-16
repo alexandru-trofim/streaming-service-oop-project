@@ -42,7 +42,7 @@ public class Program {
                 if (programInfo.getCurrentUser() == null) {
                     System.out.println("CURRENT USER IS NULL \n");
                 }
-                pageSwitcher.switchPage(currentAction.getPage(), programInfo, output);
+                pageSwitcher.switchPage(currentAction, programInfo, output);
 
             } else if(currentAction.getType().equals("on page")){
                 System.out.println("ENTERED ON PAGE "+ currentAction.getFeature() + " ON PAGE " + programInfo.getCurrentPage() + "\n");

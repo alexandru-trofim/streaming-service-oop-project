@@ -27,12 +27,12 @@ public class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(args[1]), output);
 
-        if (count == 10) {
+        //if (count == 10) {
             File gen_out = new File(args[1]);
             File out = new File(args[1] + count);
 
             Files.copy(gen_out.toPath(), out.toPath());
-        }
+        //}
         count++;
     }
 }
