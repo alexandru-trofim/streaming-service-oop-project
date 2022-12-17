@@ -1,6 +1,7 @@
-package internal.classes;
+package action.classes.pages;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import action.classes.Action;
 import run.program.ProgramInfo;
 
 public interface Page {

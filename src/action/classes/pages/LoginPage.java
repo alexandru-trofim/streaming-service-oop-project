@@ -1,8 +1,10 @@
-package internal.classes;
+package action.classes.pages;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.elements.Database;
 import database.elements.User;
+import action.classes.Action;
+import action.classes.PageSwitcher;
 import output.Output;
 import run.program.ProgramInfo;
 
@@ -22,7 +24,7 @@ public class LoginPage implements Page {
      */
     @Override
     public void executeAction(final Action currentAction, final ProgramInfo programInfo,
-                                                                    final ArrayNode output) {
+                              final ArrayNode output) {
         Database database = Database.getInstance();
         User currentUser = programInfo.getCurrentUser();
 

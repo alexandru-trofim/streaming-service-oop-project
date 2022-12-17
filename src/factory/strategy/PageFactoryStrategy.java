@@ -1,14 +1,14 @@
 package factory.strategy;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import internal.classes.Action;
-import internal.classes.HomeAuth;
-import internal.classes.LoginPage;
-import internal.classes.MoviesPage;
-import internal.classes.Page;
-import internal.classes.RegisterPage;
-import internal.classes.SeeDetailsPage;
-import internal.classes.UpgradesPage;
+import action.classes.Action;
+import action.classes.pages.HomeAuthPage;
+import action.classes.pages.LoginPage;
+import action.classes.pages.MoviesPage;
+import action.classes.pages.Page;
+import action.classes.pages.RegisterPage;
+import action.classes.pages.SeeDetailsPage;
+import action.classes.pages.UpgradesPage;
 import run.program.ProgramInfo;
 
 public class PageFactoryStrategy {
@@ -35,7 +35,7 @@ public class PageFactoryStrategy {
             } case MOVIES -> {
                 return new MoviesPage();
             } case HOME_AUTH -> {
-                return new HomeAuth();
+                return new HomeAuthPage();
             } case UPGRADES -> {
                 return new UpgradesPage();
             } case SEE_DETAILS -> {

@@ -1,5 +1,6 @@
-package internal.classes;
+package action.classes;
 
+import action.classes.pages.MoviesPage;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.elements.Movie;
 import database.elements.User;

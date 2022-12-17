@@ -1,6 +1,7 @@
-package internal.classes;
+package action.classes.pages;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import action.classes.Action;
 import output.Output;
 import run.program.ProgramInfo;
 
@@ -18,7 +19,7 @@ public class UpgradesPage implements Page {
      * @param output The output ArrayNode where the output is written.
      */
     public void buyTokens(final Action currentAction, final ProgramInfo programInfo,
-                                                                final ArrayNode output) {
+                          final ArrayNode output) {
         int countToAdd = currentAction.getCount();
         int currentCount = programInfo.getCurrentUser().getTokensCount();
         int balance = Integer.parseInt(programInfo.getCurrentUser().getCredentials().getBalance());

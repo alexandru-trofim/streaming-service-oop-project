@@ -1,10 +1,11 @@
-package internal.classes;
+package action.classes.pages;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.elements.Database;
 import database.elements.Movie;
 import database.elements.User;
 import fileio.FiltersInput;
+import action.classes.Action;
 import output.Output;
 import run.program.ProgramInfo;
 

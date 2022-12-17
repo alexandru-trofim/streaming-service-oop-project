@@ -1,5 +1,6 @@
-package internal.classes;
+package action.classes.pages;
 
+import action.classes.Action;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.elements.Movie;
 import database.elements.User;
@@ -25,7 +26,7 @@ public class SeeDetailsPage implements Page {
      * @param output The output ArrayNode where the output is written.
      */
     public void purchase(final Action currentAction, final ProgramInfo programInfo,
-                                                                final ArrayNode output)  {
+                         final ArrayNode output)  {
         User currentUser = programInfo.getCurrentUser();
 
         if (currentUser.getPurchasedMovies().contains(programInfo.getMovieDetails())) {

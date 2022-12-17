@@ -2,7 +2,7 @@ package run.program;
 
 import database.elements.Movie;
 import database.elements.User;
-import internal.classes.PageSwitcher;
+import action.classes.PageSwitcher;
 import lombok.Getter;
 import lombok.Setter;
 

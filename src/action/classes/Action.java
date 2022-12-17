@@ -1,4 +1,4 @@
-package internal.classes;
+package action.classes;
 
 import fileio.ActionInput;
 import fileio.CredentialsInput;

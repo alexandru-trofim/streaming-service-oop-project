@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.elements.Database;
 import factory.strategy.PageFactoryStrategy;
 import fileio.Input;
-import internal.classes.Action;
-import internal.classes.PageSwitcher;
+import action.classes.Action;
+import action.classes.PageSwitcher;
 import lombok.Getter;
 import lombok.Setter;
 

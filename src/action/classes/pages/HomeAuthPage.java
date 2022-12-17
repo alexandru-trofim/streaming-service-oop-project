@@ -1,12 +1,13 @@
-package internal.classes;
+package action.classes.pages;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import action.classes.Action;
 import output.Output;
 import run.program.ProgramInfo;
 
-public class HomeAuth implements Page {
+public class HomeAuthPage implements Page {
 
-    public HomeAuth() {
+    public HomeAuthPage() {
     }
 
     /**
@@ -19,7 +20,7 @@ public class HomeAuth implements Page {
      */
     @Override
     public void executeAction(final Action currentAction, final ProgramInfo programInfo,
-                                                                    final ArrayNode output) {
+                              final ArrayNode output) {
         System.out.println("ERROR!! YOU CAN'T DO ACTIONS ON HOME_AUTH PAGE\n");
         Output.outputError(programInfo, output, programInfo.getCurrentUser());
     }
