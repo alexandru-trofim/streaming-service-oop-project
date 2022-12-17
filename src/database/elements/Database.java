@@ -1,4 +1,4 @@
-package databaseElements;
+package database.elements;
 
 import fileio.Input;
 import fileio.MovieInput;
@@ -6,12 +6,11 @@ import fileio.UserInput;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
-public class Database {
+public final class Database {
 
-    private static Database database = null;
+    private static Database database;
 
     private @Getter @Setter ArrayList<Movie> moviesCollection;
     private @Getter @Setter ArrayList<User> usersCollection;
@@ -21,7 +20,12 @@ public class Database {
        usersCollection = new ArrayList<>();
     }
 
-    public static Database getInstance () {
+    /**
+     *
+     * @return returns the signle instance of the Database class because
+     * it is a Singleton class.
+     */
+    public static Database getInstance() {
         if (database == null) {
             database = new Database();
         }
@@ -29,7 +33,11 @@ public class Database {
         return database;
     }
 
-    public void addUserFromInput(UserInput userInput) {
+    /**
+     * Adds a user to the database and takes as input a UserInput object.
+     * @param userInput the user information.
+     */
+    public void addUserFromInput(final UserInput userInput) {
         if (usersCollection == null) {
             System.out.println("!!ERROR!! USER COLLECTION IS NULL" + "\n");
             return;
@@ -38,7 +46,11 @@ public class Database {
         usersCollection.add(newUser);
     }
 
-    public void addUser(User newUser) {
+    /**
+     * Adds a user to the database.
+     * @param newUser The new user.
+     */
+    public void addUser(final User newUser) {
         if (usersCollection == null) {
             System.out.println("!!ERROR!! USER COLLECTION IS NULL" + "\n");
             return;
@@ -46,7 +58,11 @@ public class Database {
         usersCollection.add(newUser);
     }
 
-    public void addMovieFromInput(MovieInput movieInput) {
+    /**
+     * Adds a movie to the database and takes as input a MovieInput object.
+     * @param movieInput The movie information.
+     */
+    public void addMovieFromInput(final MovieInput movieInput) {
         if (moviesCollection == null) {
             System.out.println("!!ERROR!! MOVIES COLLECTION IS NULL" + "\n");
             return;
@@ -55,6 +71,11 @@ public class Database {
         moviesCollection.add(newMovie);
     }
 
+    /**
+     * Takes the input data of the program and adds all the users and all the
+     * movies into the database.
+     * @param inputData the input data of the program.
+     */
     public void load(final Input inputData) {
         //take all the info from the input put in the database and action array
 
@@ -63,13 +84,22 @@ public class Database {
         //fac la fel pentru actions
     }
 
+    /**
+     * Erases the database.
+     */
     public void empty() {
         database = null;
         moviesCollection = null;
         usersCollection = null;
     }
 
-    public User findUser(String username, String password) {
+    /**
+     * Finds a user in the database by the username and the password.
+     * @param username
+     * @param password
+     * @return returns the found user, otherwise returns null
+     */
+    public User findUser(final String username, final String password) {
         return usersCollection.stream()
         .filter(user -> username.equals(user.getCredentials().getName())
                 && password.equals(user.getCredentials().getPassword()))

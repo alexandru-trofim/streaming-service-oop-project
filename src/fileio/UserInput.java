@@ -6,11 +6,19 @@ public class UserInput {
     public UserInput() {
     }
 
+    /**
+     *
+     * @return returns the Credentials of the User object
+     */
     public CredentialsInput getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(CredentialsInput credentials) {
+    /**
+     * Sets the credentials of the User
+     * @param credentials the credentials to be set
+     */
+    public void setCredentials(final CredentialsInput credentials) {
         this.credentials = credentials;
     }
 }

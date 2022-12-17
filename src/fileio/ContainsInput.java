@@ -1,7 +1,5 @@
 package fileio;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 
@@ -12,19 +10,35 @@ public class ContainsInput {
     public ContainsInput() {
     }
 
+    /**
+     *
+     * @return returns the ArrayList of actors from ContainsInput
+     */
     public ArrayList<String> getActors() {
         return actors;
     }
 
-    public void setActors(ArrayList<String> actors) {
+    /**
+     * Sets the ArrayList of actors in ContainsInput
+     * @param actors array to be set
+     */
+    public void setActors(final ArrayList<String> actors) {
         this.actors = actors;
     }
 
-    public ArrayList<String> getGenre() {
+    /**
+     *
+     * @return returns the ArrayList of genres from ContainsInput
+     */
+    public ArrayList<String> getGenres() {
         return genre;
     }
 
-    public void setGenre(ArrayList<String> genre) {
+    /**
+     * Sets the ArrayList of genre in ContainsInput
+     * @param genre array to be set
+     */
+    public void setGenre(final ArrayList<String> genre) {
         this.genre = genre;
     }
 }

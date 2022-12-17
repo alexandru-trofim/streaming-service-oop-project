@@ -1,17 +1,17 @@
-package runProgram;
+package run.program;
 
-import databaseElements.Movie;
-import databaseElements.User;
-import internalClasses.PageSwitcher;
+import database.elements.Movie;
+import database.elements.User;
+import internal.classes.PageSwitcher;
 import lombok.Getter;
 import lombok.Setter;
 
 public class ProgramInfo {
-    private @Getter @Setter PageSwitcher.CURRENT_PAGE currentPage;
+    private @Getter @Setter PageSwitcher.CURRENTPAGE currentPage;
     private @Getter @Setter User currentUser;
     private @Getter @Setter Movie movieDetails;
 
-    public ProgramInfo(PageSwitcher.CURRENT_PAGE currentPage) {
+    public ProgramInfo(final PageSwitcher.CURRENTPAGE currentPage) {
         this.currentPage = currentPage;
         this.currentUser = null;
         this.movieDetails = null;

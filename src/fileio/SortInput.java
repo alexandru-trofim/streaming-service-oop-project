@@ -1,7 +1,5 @@
 package fileio;
 
-import lombok.Getter;
-import lombok.Setter;
 
 public class SortInput {
     private String rating;
@@ -10,19 +8,35 @@ public class SortInput {
     public SortInput() {
     }
 
+    /**
+     *
+     * @return returns the rating of SortInput Object
+     */
     public String getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    /**
+     * Sets the rating of SortInput Object
+     * @param rating the rating to be set
+     */
+    public void setRating(final String rating) {
         this.rating = rating;
     }
 
+    /**
+     *
+     * @return returns the duration of SortInput Object
+     */
     public String getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    /**
+     * Sets the duration of SortInput Object
+     * @param duration the duration to be set
+     */
+    public void setDuration(final String duration) {
         this.duration = duration;
     }
 }

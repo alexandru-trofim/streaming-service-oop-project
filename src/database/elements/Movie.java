@@ -1,4 +1,4 @@
-package databaseElements;
+package database.elements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.MovieInput;
@@ -22,7 +22,7 @@ public class Movie {
     private @Getter @Setter ArrayList<Integer> movieRatings;
 
 
-    public Movie(MovieInput movieInput) {
+    public Movie(final MovieInput movieInput) {
         name = movieInput.getName();
         year = movieInput.getYear();
         duration = movieInput.getDuration();

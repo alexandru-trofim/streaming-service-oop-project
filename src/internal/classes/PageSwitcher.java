@@ -1,17 +1,16 @@
-package internalClasses;
+package internal.classes;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import databaseElements.Movie;
-import databaseElements.User;
+import database.elements.Movie;
+import database.elements.User;
 import output.Output;
-import runProgram.Program;
-import runProgram.ProgramInfo;
+import run.program.ProgramInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PageSwitcher {
-    public enum CURRENT_PAGE {
+    public enum CURRENTPAGE {
         HOME_AUTH,
         HOME_NO_AUTH,
         LOGIN,
@@ -25,8 +24,17 @@ public class PageSwitcher {
     public PageSwitcher() {
     }
 
-    public void switchPage(Action currentAction, ProgramInfo programInfo, ArrayNode output) {
-        CURRENT_PAGE currentPage = programInfo.getCurrentPage();
+    /**
+     * It switches the page from the old page to the new page given in
+     * the currentAction. It throws an error if the switch is not possible.
+     * @param currentAction The current action.
+     * @param programInfo The ProgramInfo object that stores the current user,
+     *                    the current page and the movie on seeDetails page.
+     * @param output The output ArrayNode where the output is written.
+     */
+    public void switchPage(final Action currentAction, final ProgramInfo programInfo,
+                                                                    final ArrayNode output) {
+        CURRENTPAGE currentPage = programInfo.getCurrentPage();
         User currentUser = programInfo.getCurrentUser();
         String newPage = currentAction.getPage();
 
@@ -34,42 +42,44 @@ public class PageSwitcher {
             System.out.println("ERROR!! CURRENT PAGE IS NULL \n");
             return;
         }
-
         if (newPage.equals("register")) {
-            if (currentPage != CURRENT_PAGE.HOME_NO_AUTH) {
-                System.out.println("!!ERROR!! SWITCHING PAGE FROM " + currentPage + " to " + newPage + "\n");
+            if (currentPage != CURRENTPAGE.HOME_NO_AUTH) {
+                System.out.println("!!ERROR!! SWITCHING PAGE FROM "
+                                            + currentPage + " to " + newPage + "\n");
                 Output.outputError(programInfo, output, currentUser);
                 return;
             }
-            programInfo.setCurrentPage(CURRENT_PAGE.REGISTER);
+            programInfo.setCurrentPage(CURRENTPAGE.REGISTER);
 
         } else if (newPage.equals("login")) {
-            if (currentPage != CURRENT_PAGE.HOME_NO_AUTH) {
-                System.out.println("!!ERROR!! SWITCHING PAGE FROM " + currentPage + " to " + newPage + "\n");
+            if (currentPage != CURRENTPAGE.HOME_NO_AUTH) {
+                System.out.println("!!ERROR!! SWITCHING PAGE FROM "
+                                            + currentPage + " to " + newPage + "\n");
                 Output.outputError(programInfo, output, currentUser);
                 return;
             }
-            programInfo.setCurrentPage(CURRENT_PAGE.LOGIN);
+            programInfo.setCurrentPage(CURRENTPAGE.LOGIN);
 
         } else if (newPage.equals("logout")) {
-            if (currentPage == CURRENT_PAGE.HOME_NO_AUTH) {
-
-                System.out.println("!!ERROR!! SWITCHING PAGE FROM" + currentPage + " to " + newPage + "\n");
+            if (currentPage == CURRENTPAGE.HOME_NO_AUTH) {
+                System.out.println("!!ERROR!! SWITCHING PAGE FROM"
+                                            + currentPage + " to " + newPage + "\n");
                 Output.display(currentUser, Output.TYPE.ERRROR, output);
                 return;
             }
             currentUser.setMoviesDisplayed(null);
-            programInfo.setCurrentPage(CURRENT_PAGE.HOME_NO_AUTH);
+            programInfo.setCurrentPage(CURRENTPAGE.HOME_NO_AUTH);
             //set current user to null
             programInfo.setCurrentUser(null);
 
         } else if (newPage.equals("movies")) {
-            if (currentPage != CURRENT_PAGE.HOME_AUTH
-                    && currentPage != CURRENT_PAGE.SEE_DETAILS
-                    && currentPage != CURRENT_PAGE.UPGRADES
-                    && currentPage != CURRENT_PAGE.MOVIES) {
+            if (currentPage != CURRENTPAGE.HOME_AUTH
+                    && currentPage != CURRENTPAGE.SEE_DETAILS
+                    && currentPage != CURRENTPAGE.UPGRADES
+                    && currentPage != CURRENTPAGE.MOVIES) {
 
-                System.out.println("!!ERROR!! SWITCHING PAGE FROM" + currentPage + " to " + newPage + "\n");
+                System.out.println("!!ERROR!! SWITCHING PAGE FROM"
+                                            + currentPage + " to " + newPage + "\n");
                 Output.display(currentUser, Output.TYPE.ERRROR, output);
                 return;
             }
@@ -77,19 +87,18 @@ public class PageSwitcher {
             MoviesPage moviesPage = new MoviesPage();
             moviesPage.displayWhenSwitchPage(programInfo, output);
 
-            programInfo.setCurrentPage(CURRENT_PAGE.MOVIES);
+            programInfo.setCurrentPage(CURRENTPAGE.MOVIES);
 
         } else if (newPage.equals("see details")) {
-            if (currentPage != CURRENT_PAGE.MOVIES) {
-
-                System.out.println("!!ERROR!! SWITCHING PAGE FROM" + currentPage + " to " + newPage + "\n");
+            if (currentPage != CURRENTPAGE.MOVIES) {
+                System.out.println("!!ERROR!! SWITCHING PAGE FROM"
+                                            + currentPage + " to " + newPage + "\n");
                 programInfo.setMovieDetails(null);
                 Output.display(currentUser, Output.TYPE.ERRROR, output);
                 return;
             }
             //here we should change the page and try to find the movie
             //if we don't have the movie we throw an error
-            //TODO
             Movie movieToSee = null;
             if (programInfo.getCurrentUser().getMoviesDisplayed() != null) {
                 movieToSee = programInfo.getCurrentUser().getMoviesDisplayed()
@@ -107,7 +116,7 @@ public class PageSwitcher {
             }
 
             //now we change the page and set up the Movie
-            programInfo.setCurrentPage(CURRENT_PAGE.SEE_DETAILS);
+            programInfo.setCurrentPage(CURRENTPAGE.SEE_DETAILS);
             programInfo.setMovieDetails(movieToSee);
 
             ArrayList<Movie> movieBackup = currentUser.getMoviesDisplayed();
@@ -117,18 +126,16 @@ public class PageSwitcher {
             currentUser.setMoviesDisplayed(movieBackup);
 
         } else if (newPage.equals("upgrades")) {
-            System.out.println("SWITCH PAGE TO UPGRADES !!!!!!!!!!\n");
-            if (currentPage != CURRENT_PAGE.SEE_DETAILS
-                    && currentPage != CURRENT_PAGE.UPGRADES
-                    && currentPage != CURRENT_PAGE.MOVIES
-                    && currentPage != CURRENT_PAGE.HOME_AUTH) {
-                System.out.println("!!ERROR!! SWITCHING PAGE FROM" + currentPage + " to " + newPage + "\n");
+            if (currentPage != CURRENTPAGE.SEE_DETAILS
+                    && currentPage != CURRENTPAGE.UPGRADES
+                    && currentPage != CURRENTPAGE.MOVIES
+                    && currentPage != CURRENTPAGE.HOME_AUTH) {
+                System.out.println("!!ERROR!! SWITCHING PAGE FROM"
+                                            + currentPage + " to " + newPage + "\n");
                 Output.outputError(programInfo, output, currentUser);
                 return;
             }
-            programInfo.setCurrentPage(CURRENT_PAGE.UPGRADES);
-
-
+            programInfo.setCurrentPage(CURRENTPAGE.UPGRADES);
         }
     }
 }

@@ -2,10 +2,9 @@ package output;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import databaseElements.Database;
-import databaseElements.Movie;
-import databaseElements.User;
-import runProgram.ProgramInfo;
+import database.elements.Movie;
+import database.elements.User;
+import run.program.ProgramInfo;
 
 import java.util.ArrayList;
 
@@ -16,12 +15,17 @@ public class Output {
         NO_ERRROR
     }
 
-    public static void addMovies(ArrayNode moviesArray, ArrayList<Movie> movies) {
+    /**
+     * Adds a movie array to the output.
+     * @param moviesArray the ArrayNode where we output the movies array.
+     * @param movies the array to be written in output.
+     */
+    public static void addMovies(final ArrayNode moviesArray, final ArrayList<Movie> movies) {
         if (movies == null) {
             return;
         }
 
-        for(Movie movie : movies) {
+        for (Movie movie : movies) {
             if (movie.getName().equals("Titanic")) {
                 System.out.println(movie.getName() + "LIKE " + movie.getNumLikes() + "\n");
             }
@@ -40,23 +44,33 @@ public class Output {
 
     }
 
-    public static void outputError(ProgramInfo programInfo, ArrayNode output, User currentUser) {
+    /**
+     * Outputs a outputs an error.
+     * @param currentUser The current user.
+     * @param programInfo The ProgramInfo object that stores the current user,
+     *                    the current page and the movie on seeDetails page.
+     * @param output The output ArrayNode where the output is written.
+     */
+    public static void outputError(final ProgramInfo programInfo, final ArrayNode output,
+                                                                    final User currentUser) {
         ArrayList<Movie> movieBackup = currentUser.getMoviesDisplayed();
 
-        if (currentUser != null) {
-            currentUser.setMoviesDisplayed(null);
-            programInfo.getCurrentUser().setUserNullOutput(true);
-            Output.display(currentUser, TYPE.ERRROR, output);
-            programInfo.getCurrentUser().setUserNullOutput(false);
-            currentUser.setMoviesDisplayed(movieBackup);
-
-        } else {
-            Output.display(currentUser, TYPE.ERRROR, output);
-        }
+        currentUser.setMoviesDisplayed(null);
+        programInfo.getCurrentUser().setUserNullOutput(true);
+        Output.display(currentUser, TYPE.ERRROR, output);
+        programInfo.getCurrentUser().setUserNullOutput(false);
+        currentUser.setMoviesDisplayed(movieBackup);
 
     }
 
-    public static void display(User currentUser, TYPE outputType, ArrayNode output) {
+    /**
+     * Puts in the output the standardized message when a successful action is completed.
+     * @param currentUser The current user.
+     * @param outputType The type of the output.
+     * @param output The output arrayNode.
+     */
+    public static void display(User currentUser, final TYPE outputType,
+                                                            final ArrayNode output) {
         String error;
         ObjectNode commandOutput = output.objectNode();
 
@@ -68,9 +82,8 @@ public class Output {
 
         commandOutput.put("error", error);
         if (currentUser != null && currentUser.getMoviesDisplayed() != null) {
-            //System.out.println("size la database " + Database.getInstance().getMoviesCollection().size() + " sile la current users " + currentUser.getMoviesDisplayed().size() + "\n" );
             commandOutput.putPOJO("currentMoviesList", currentUser.getMoviesDisplayed());
-            ArrayNode currentMoviesList= commandOutput.putArray("currentMoviesList");
+            ArrayNode currentMoviesList = commandOutput.putArray("currentMoviesList");
             addMovies(currentMoviesList, currentUser.getMoviesDisplayed());
         } else {
             commandOutput.putArray("currentMoviesList");
@@ -93,10 +106,7 @@ public class Output {
 
             user.put("tokensCount", currentUser.getTokensCount());
             user.put("numFreePremiumMovies", currentUser.getNumFreePremiumMovies());
-//            user.putPOJO("purchasedMovies", currentUser.getPurchasedMovies());
-//            user.putPOJO("watchedMovies", currentUser.getWatchedMovies());
-//            user.putPOJO("likedMovies", currentUser.getLikedMovies());
-//            user.putPOJO("ratedMovies", currentUser.getRatedMovies());
+
             ArrayNode purchasedMovies = user.putArray("purchasedMovies");
             addMovies(purchasedMovies, currentUser.getPurchasedMovies());
 
@@ -114,9 +124,6 @@ public class Output {
         }
 
         output.add(commandOutput);
-        if (currentUser != null) {
-            System.out.println("ON LOGIN USER HAS " + currentUser.getCredentials().getAccountType() + "  " +currentUser.getTokensCount() +  "\n");
-        }
     }
 
 

@@ -1,4 +1,4 @@
-package internalClasses;
+package internal.classes;
 
 import fileio.ActionInput;
 import fileio.CredentialsInput;
@@ -17,7 +17,7 @@ public class Action {
     private @Getter @Setter String startsWith;
     private @Getter @Setter int rate;
 
-    public Action(ActionInput actionInput) {
+    public Action(final ActionInput actionInput) {
          type = actionInput.getType();
          page = actionInput.getPage();
          movie = actionInput.getMovie();

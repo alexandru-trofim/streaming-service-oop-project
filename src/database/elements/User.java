@@ -1,4 +1,4 @@
-package databaseElements;
+package database.elements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.CredentialsInput;
@@ -6,11 +6,11 @@ import fileio.UserInput;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User {
 
+    private final int defaultNrPremiumMovies = 15;
     private @Getter @Setter Credentials credentials;
     private @Getter @Setter int tokensCount;
     private @Getter @Setter int numFreePremiumMovies;
@@ -23,28 +23,23 @@ public class User {
     @JsonIgnore
     private @Getter @Setter boolean userNullOutput;
 
-
-
-
-
-    public User(UserInput userInput) {
+    public User(final UserInput userInput) {
         credentials = new Credentials(userInput.getCredentials());
         tokensCount = 0;
-        numFreePremiumMovies = 15;
+        numFreePremiumMovies = defaultNrPremiumMovies;
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
         ratedMovies = new ArrayList<>();
     }
 
-    public User(CredentialsInput credentialsInput) {
+    public User(final CredentialsInput credentialsInput) {
         credentials = new Credentials(credentialsInput);
         tokensCount = 0;
-        numFreePremiumMovies = 15;
+        numFreePremiumMovies = defaultNrPremiumMovies;
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
         ratedMovies = new ArrayList<>();
     }
-
 }

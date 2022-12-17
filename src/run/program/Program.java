@@ -1,18 +1,14 @@
-package runProgram;
+package run.program;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import databaseElements.Database;
-import databaseElements.Movie;
-import databaseElements.User;
-import factoryStrategy.PageFactoryStrategy;
+import database.elements.Database;
+import factory.strategy.PageFactoryStrategy;
 import fileio.Input;
-import internalClasses.Action;
-import internalClasses.PageSwitcher;
+import internal.classes.Action;
+import internal.classes.PageSwitcher;
 import lombok.Getter;
 import lombok.Setter;
-import output.Output;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class Program {
@@ -21,12 +17,18 @@ public class Program {
     public Program() {
     }
 
-    public void run(final Input inputData, ArrayNode output) {
+    /**
+     * Takes as parameters the input data of the program and an output
+     * arrayNode. It initializes the database and runs all the actions.
+     * @param inputData The input data.
+     * @param output The output arraynode.
+     */
+    public void run(final Input inputData, final ArrayNode output) {
         PageFactoryStrategy pageFactoryStrategy = new PageFactoryStrategy();
         ArrayList<Action> actions = new ArrayList<>();
         PageSwitcher pageSwitcher = new PageSwitcher();
         Database database = Database.getInstance();
-        programInfo = new ProgramInfo(PageSwitcher.CURRENT_PAGE.HOME_NO_AUTH);
+        programInfo = new ProgramInfo(PageSwitcher.CURRENTPAGE.HOME_NO_AUTH);
 
         database.load(inputData);
 
@@ -34,28 +36,26 @@ public class Program {
         inputData.getActions()
                 .forEach((actionInput) -> actions.add(new Action(actionInput)));
 
-        for(Action currentAction: actions) {
-            //here we probably will use our factory/strategy
+        for (Action currentAction: actions) {
+            /*
+             * here we use our factoryStrategy setup for a very simple
+             * and clean flow of the program.
+             */
             if (currentAction.getType().equals("change page")) {
-                System.out.println("ENTERED CHANGE PAGE FROM " + programInfo.getCurrentPage() + " " + currentAction.getPage() + "\n");
                 //switch page
                 if (programInfo.getCurrentUser() == null) {
                     System.out.println("CURRENT USER IS NULL \n");
                 }
                 pageSwitcher.switchPage(currentAction, programInfo, output);
 
-            } else if(currentAction.getType().equals("on page")){
-                System.out.println("ENTERED ON PAGE "+ currentAction.getFeature() + " ON PAGE " + programInfo.getCurrentPage() + "\n");
-                //here we'll do the strategy
+            } else if (currentAction.getType().equals("on page")) {
                 pageFactoryStrategy.doStrategy(currentAction, programInfo, output);
                 if (programInfo.getCurrentUser() == null) {
                     System.out.println("CURRENT USER IS NULL \n");
                 }
             }
         }
-
         database.empty();
-        programInfo.setCurrentPage(PageSwitcher.CURRENT_PAGE.HOME_NO_AUTH);
-
+        programInfo.setCurrentPage(PageSwitcher.CURRENTPAGE.HOME_NO_AUTH);
     }
 }

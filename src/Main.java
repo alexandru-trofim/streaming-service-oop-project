@@ -1,18 +1,22 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.Input;
-import lombok.Getter;
-import runProgram.Program;
+import run.program.Program;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class Main {
-    static int count = 1;
-    public static void main(String[] args) throws IOException {
+    /**
+     * The main function that gets an input  file
+     * and an output file. It runs the program
+     * and writes the result to the  output file.
+     * @param args first argument is the input file
+     *             and the second is the output file
+     * @throws IOException
+     */
+    public static void main(final String[] args) throws IOException {
         Program program = new Program();
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -27,12 +31,5 @@ public class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(args[1]), output);
 
-        //if (count == 10) {
-            File gen_out = new File(args[1]);
-            File out = new File(args[1] + count);
-
-            Files.copy(gen_out.toPath(), out.toPath());
-        //}
-        count++;
     }
 }

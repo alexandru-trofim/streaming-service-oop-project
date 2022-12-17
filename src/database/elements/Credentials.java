@@ -1,4 +1,4 @@
-package databaseElements;
+package database.elements;
 
 import fileio.CredentialsInput;
 import lombok.Getter;
@@ -12,7 +12,7 @@ public class Credentials {
     private @Getter @Setter String balance;
 
 
-    public Credentials(CredentialsInput credentialsInput) {
+    public Credentials(final CredentialsInput credentialsInput) {
         this.name = credentialsInput.getName();
         this.password = credentialsInput.getPassword();
         this.accountType = credentialsInput.getAccountType();
