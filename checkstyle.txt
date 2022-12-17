@@ -1,7 +1,7 @@
 Starting audit...
 [ERROR] /Users/alexandrutrofim/Documents/JavaProjects/streaming-service-oop-project/./src/checker/CheckStyleConstants.java:3:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] /Users/alexandrutrofim/Documents/JavaProjects/streaming-service-oop-project/./src/output/Output.java:11:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
-[ERROR] /Users/alexandrutrofim/Documents/JavaProjects/streaming-service-oop-project/./src/output/Output.java:72:32: Parameter currentUser should be final. [FinalParameters]
+[ERROR] /Users/alexandrutrofim/Documents/JavaProjects/streaming-service-oop-project/./src/output/Output.java:69:32: Parameter currentUser should be final. [FinalParameters]
 [ERROR] /Users/alexandrutrofim/Documents/JavaProjects/streaming-service-oop-project/./src/Main.java:10:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 Audit done.
 Checkstyle ends with 4 errors.

@@ -26,9 +26,6 @@ public class Output {
         }
 
         for (Movie movie : movies) {
-            if (movie.getName().equals("Titanic")) {
-                System.out.println(movie.getName() + "LIKE " + movie.getNumLikes() + "\n");
-            }
             ObjectNode newMovie = moviesArray.objectNode();
             newMovie.put("name", movie.getName());
             newMovie.put("year", movie.getYear());
